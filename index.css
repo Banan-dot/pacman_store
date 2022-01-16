@@ -6,8 +6,8 @@
 
 html,
 body {
-    min-height: 100vh;
-    min-width: 40vh;
+    min-height:100vh;
+    min-width: 100vw;
     display: flex;
     flex-direction: column;
 }
@@ -15,6 +15,7 @@ body {
 
 .header,
 .footer {
+    font-size: 30px;
     font-family: 'Kurale', serif;
 }
 
@@ -22,9 +23,9 @@ body {
     display: inline-flex;
     height: 100px;
     width: 100%;
+    overflow: hidden;
     background: #2a2b2c;
     top: 0;
-    font-size: 30px;
     position: absolute;
     gap: 4rem;
     text-align: center;
@@ -32,15 +33,75 @@ body {
     font-weight: normal;
 }
 
-.logo {
+.header__logo {
     flex: 3 3 10%;
     display: inline-block;
     position: relative;
     z-index: 2;
+    text-align: center;
     flex-grow: 3;
 }
 
-.pacdot {
+.header__logo img {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 2;
+    object-fit: contain;
+}
+
+
+.header__search-label {
+    width: 300px;
+}
+
+.header__search-label:after {
+    content: "";
+    clear: both;
+    display: table
+}
+
+.header__search-label form {
+    width: auto;
+    float: right;
+    align-items: center;
+    position: relative;
+    margin-top: 30px;
+    margin-right: 30px;
+}
+
+.header__search-label input {
+    width: 250px;
+    height: 42px;
+    padding-left: 15px;
+    border-radius: 42px;
+    border: 2px solid #324b4e;
+    background: #F9F0DA;
+    outline: none;
+    position: relative;
+    transition: .3s linear;
+}
+
+.header__search-label input:focus {
+    width: 300px;
+}
+
+.header__search-label button {
+    height: 42px;
+    float: left;
+    background: none;
+    border: none;
+    position: absolute;
+    right: 20px;
+}
+
+.header__search-label button:before {
+    content: "\1F50D";
+}
+
+.logo__pacdot {
     height: 20px;
     width: 20px;
     background-color: yellow;
@@ -50,38 +111,35 @@ body {
     left: 50%;
     display: inline-block;
     overflow: hidden;
-    margin: 0 auto;
-    margin-left: -10px;
-
-
+    margin: 0 auto 0 -10px;
 }
 
-.pacdot:nth-child(2) {
+.logo__pacdot:nth-child(2) {
     position: absolute;
     z-index: 1;
     opacity: 1;
-    animation: twinkle-1 3s linear infinite;
+    animation: pacdot-anim 3s linear infinite;
     animation-delay: 2s;
 }
 
 
-.pacdot:nth-child(3) {
+.logo__pacdot:nth-child(3) {
     position: absolute;
     z-index: 1;
     opacity: 1;
-    animation: twinkle-1 3s linear infinite;
+    animation: pacdot-anim 3s linear infinite;
 
 }
 
-.pacdot:nth-child(4) {
+.logo__pacdot:nth-child(4) {
     position: absolute;
     z-index: 1;
-    animation: twinkle-1 3s linear infinite;
+    animation: pacdot-anim 3s linear infinite;
     opacity: 1;
     animation-delay: 1s;
 }
 
-@keyframes twinkle-1 {
+@keyframes pacdot-anim {
     from {
         opacity: 1;
         z-index: 0;
@@ -93,59 +151,59 @@ body {
         opacity: 0.0;
     }
 }
-.logo{
-    align-items: center;
-}
 
-.logo img {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 2;
-    object-fit: contain;
-}
-
-nav ul {
+.header__ghost-container-down ul {
     list-style: none;
     margin: 0;
+    position: relative;
     padding: 0;
 }
 
-nav a {
+.header__ghost-container-down a {
     display: block;
     text-decoration: none;
     outline: none;
+    height: 100px;
+    text-align: center;
     transition: .4s ease-in-out;
 }
 
-.topmenu {
+.header_ghosts-container-topmenu {
     backface-visibility: hidden;
+    height: 100%;
     background: #2a2b2c;
 }
 
-.topmenu > li {
-    display: block;
-    top: 1rem;
+.header_ghosts-container-topmenu > li {
+    display:inline-block;
+    /*top: 1rem;*/
     position: relative;
 }
 
-.topmenu > li > a {
-    height: 70px;
-    line-height: 70px;
+.header_ghosts-container-topmenu > li > a {
+    display: block;
+    position: relative;
+    line-height: 100px;
+    margin: auto;
     padding: 0 30px;
     color: #ffffff;
 }
 
-.topmenu li a:hover {
+.header_ghosts-container-topmenu li a:hover {
     color: #E6855F;
 }
 
-.submenu {
+
+.header__ghosts-container-submenu li{
+    list-style-type: none;
+}
+
+.header__ghosts-container-submenu {
     background: #2a2b2c;
     border: 2px solid #003559;
-    position: absolute;
-    left: auto;
+    position: relative;
     visibility: hidden;
+    list-style-type: none;
     opacity: 0;
     width: 100%;
     transform: perspective(600px) rotateX(-90deg);
@@ -153,25 +211,25 @@ nav a {
     transition: .6s ease-in-out;
 }
 
-.topmenu > li:hover .submenu {
+.header_ghosts-container-topmenu > li:hover .header__ghosts-container-submenu {
     visibility: visible;
     opacity: 1;
     transform: perspective(600px) rotateX(0deg);
 }
 
-.submenu li a {
+.header__ghosts-container-submenu li a {
     color: #ffffff;
     font-size: 20px;
     line-height: 36px;
     padding: 0 25px;
     display: flex;
+    height: auto;
     flex: 0 0 auto;
     justify-content: center;
-    font-family: 'Kurale', serif;
 }
 
 
-.pacman_name_store {
+.header__name-store {
     margin-left: 2rem;
     color: #ffffff;
 
@@ -193,11 +251,7 @@ nav a {
     overflow-wrap: break-word;
 }
 
-/*.content:not(.page-header__title) {*/
-/*    margin-left: 5rem;*/
-/*}*/
-
-.content_ghosts_img {
+.content__ghosts_img {
     float: right;
     width: 30%;
     height: 30%;
@@ -225,7 +279,7 @@ a:hover {
     margin-left: 6rem;
 }
 
-.page-header__title {
+.content__page-title {
     font-size: 40px;
     text-align: center;
     font-weight: bold;
@@ -234,10 +288,10 @@ a:hover {
 
 .footer {
     flex-shrink: 0;
-    padding: 20px;
+    padding: 10px;
+    width: 100%;
     background-color: #2a2b2c;
     color: #fff;
-    font-size: 2rem;
     border-top: 1px solid #808080;
 }
 
@@ -250,73 +304,23 @@ a:hover {
     transition: .4s ease-in-out;
 }
 
-.footer .contact {
+.footer .footer__contact {
     float: left;
     margin-left: 1%;
     color: #ffffff;
 }
 
-.footer .site-name {
+.footer .footer__site-name {
     float: right;
     margin-right: 1%;
     margin-top: 45px;
 }
 
-.footer .organization-name::after,
-.footer .organization-name::before,
-.footer .mail::before {
+.footer .footer__mail::after,
+.footer .footer__mail::before{
     color: black;
 }
 
 .footer a {
     text-decoration: none;
-}
-
-
-.search__label {
-    width: 300px;
-}
-
-.search__label:after {
-    content: "";
-    clear: both;
-    display: table
-}
-
-.search__label form {
-    width: auto;
-    float: right;
-    align-items: center;
-    position: relative;
-    margin-top: 30px;
-    margin-right: 30px;
-}
-
-.search__label input {
-    width: 250px;
-    height: 42px;
-    padding-left: 15px;
-    border-radius: 42px;
-    border: 2px solid #324b4e;
-    background: #F9F0DA;
-    outline: none;
-    position: relative;
-    transition: .3s linear;
-}
-
-.search__label input:focus {
-    width: 300px;
-}
-
-.search__label button {
-    height: 42px;
-    float: left;
-    background: none;
-    border: none;
-    position: absolute;
-    right: 20px;
-}
-
-.search__label button:before {
-    content: "\1F50D";
 }
